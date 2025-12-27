@@ -1,138 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Security Consultant | Global Services</title>
-  <meta name="description" content="Professional website security, malware removal, and vulnerability assessment for small businesses worldwide.">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0f1a;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-    header {
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    }
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 18px;
-      color: #d0d0d0;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 30px;
-      background: #00e0ff;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-    }
-    section {
-      padding: 70px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 32px;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    .card {
-      background: #12182b;
-      padding: 25px;
-      border-radius: 8px;
-    }
-    .card h3 {
-      margin-top: 0;
-      color: #00e0ff;
-    }
-    .trust {
-      text-align: center;
-      background: #0f1424;
-      padding: 60px 20px;
-    }
-    .trust p {
-      max-width: 800px;
-      margin: auto;
-      color: #cfcfcf;
-    }
-    .contact {
-      text-align: center;
-    }
-    .contact p {
-      margin-bottom: 10px;
-    }
-    footer {
-      background: #080b14;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Website Security Consultant | Free Security Check</title>
+<meta name="description" content="Professional website security, malware removal and protection services for businesses worldwide. Free website security check available.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #0a1633, #050812);
+  color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(77,163,255,0.15), transparent),
+    radial-gradient(circle at 70% 70%, rgba(0,255,204,0.12), transparent);
+}
+
+.hero h1 {
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 780px;
+  margin: auto;
+  color: #cfd9ff;
+}
+
+.cta {
+  margin-top: 40px;
+}
+
+.btn {
+  padding: 15px 36px;
+  border-radius: 30px;
+  font-weight: 600;
+  display: inline-block;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4da3ff, #00ffd0);
+  color: #000;
+  box-shadow: 0 0 25px rgba(77,163,255,0.6);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0,255,208,0.8);
+}
+
+.btn-secondary {
+  border: 1px solid #4da3ff;
+  color: #ffffff;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 90px 20px;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 30px;
+}
+
+.section p {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+  color: #cfd9ff;
+}
+
+/* ===== GLASS CARDS ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 30px;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(77,163,255,0.6);
+}
+
+.card h3 {
+  color: #4da3ff;
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+/* ===== AUDIT ===== */
+.audit {
+  background: linear-gradient(135deg, rgba(77,163,255,0.12), rgba(0,255,204,0.08));
+  border-radius: 25px;
+  padding: 70px 30px;
+}
+
+/* ===== CONTACT ===== */
+.contact {
+  text-align: center;
+  font-size: 18px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #02040a;
+  color: #8ea0ff;
+  font-size: 14px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 38px; }
+}
+</style>
 </head>
+
 <body>
 
-<header>
+<section class="hero">
   <h1>Website Security & Malware Removal</h1>
-  <p>Helping small businesses secure their websites and prevent costly cyber attacks</p>
-  <a class="btn" href="#contact">Get a Free Security Check</a>
-</header>
+  <p>
+    I help small businesses protect their websites, recover from security incidents,
+    and prevent future cyber threats through clear and practical security solutions.
+  </p>
+  <div class="cta">
+    <a href="#audit" class="btn btn-primary">Get a Free Security Check</a>
+    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+  </div>
+</section>
 
-<section>
-  <h2>My Services</h2>
-  <div class="services">
+<section class="section">
+  <h2>Common Website Security Concerns</h2>
+  <p>
+    Security issues often appear without warning — website downtime, malware alerts,
+    or the risk of customer data exposure. Without specialist support, these problems
+    can affect trust, revenue, and brand reputation.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Services</h2>
+  <div class="grid">
     <div class="card">
       <h3>Website Security Audit</h3>
-      <p>Identify vulnerabilities, misconfigurations, and security risks before attackers do.</p>
+      <p>Identify visible vulnerabilities, outdated components, and configuration risks.</p>
     </div>
     <div class="card">
-      <h3>Malware & Hack Recovery</h3>
-      <p>Complete cleanup of hacked websites, malware removal, and security hardening.</p>
+      <h3>Malware Removal & Recovery</h3>
+      <p>Professional cleanup and safe restoration of compromised websites.</p>
     </div>
     <div class="card">
-      <h3>WordPress Security</h3>
-      <p>Secure WordPress sites, plugins, themes, and admin panels against common attacks.</p>
+      <h3>WordPress Security Hardening</h3>
+      <p>Reduce exposure to common threats through secure configuration and updates.</p>
     </div>
     <div class="card">
-      <h3>Ongoing Protection</h3>
-      <p>Monthly monitoring, updates, firewall setup, and backup strategy.</p>
+      <h3>Ongoing Protection & Monitoring</h3>
+      <p>Continuous security oversight to help prevent future incidents.</p>
     </div>
   </div>
 </section>
 
-<section class="trust">
-  <h2>Why Work With Me?</h2>
+<section id="audit" class="section audit">
+  <h2>Free Website Security Check</h2>
   <p>
-    I provide practical, real-world website security services focused on prevention, fast recovery, 
-    and clear communication. I work remotely with clients worldwide and offer honest advice, 
-    transparent pricing, and quick response times.
+    Receive a free basic security review highlighting visible risks and recommended
+    next steps. No obligation. Response typically within 24 hours.
   </p>
 </section>
 
-<section id="contact" class="contact">
-  <h2>Free Website Security Check</h2>
-  <p>Email me your website URL and I’ll send you a basic security report.</p>
-  <p><strong>Email:</strong> contact@yourdomain.in</p>
-  <p><strong>Response time:</strong> within 24 hours</p>
+<section id="contact" class="section contact">
+  <h2>Contact</h2>
+  <p>
+    Send your website URL to:<br>
+    <strong>contact@yourdomain.in</strong>
+  </p>
 </section>
 
 <footer>
-  © 2025 | Website Security Consultant | Serving Clients Globally
+  Website Security Consultant | Serving Clients Globally
 </footer>
 
 </body>
