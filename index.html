@@ -1,1092 +1,1120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBERGUARD AI | Advanced Website Security for a Connected World</title>
-    <meta name="description" content="Intelligent, resilient, and proactive website security solutions for global enterprises. AI-powered threat detection and prevention.">
-    
-    <!-- Advanced Graphics Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ===== QUANTUM CYBERSECURITY DESIGN SYSTEM ===== */
-        :root {
-            --quantum-black: #050A14;
-            --deep-navy: #0A1428;
-            --cyber-blue: #00F3FF;
-            --neon-cyan: #00FFFF;
-            --quantum-violet: #8A2BE2;
-            --electric-purple: #9D4EDD;
-            --secure-green: #00FF9D;
-            --alert-amber: #FFB347;
-            
-            --gradient-primary: linear-gradient(135deg, var(--cyber-blue) 0%, var(--quantum-violet) 50%, var(--electric-purple) 100%);
-            --gradient-secondary: linear-gradient(90deg, var(--neon-cyan) 0%, var(--secure-green) 100%);
-            --gradient-dark: linear-gradient(180deg, rgba(5,10,20,0.95) 0%, rgba(10,20,40,0.98) 100%);
-            
-            --glass-bg: rgba(10, 20, 40, 0.25);
-            --glass-border: rgba(0, 243, 255, 0.15);
-            --glass-highlight: rgba(255, 255, 255, 0.08);
-            
-            --glow-blue: 0 0 30px rgba(0, 243, 255, 0.4);
-            --glow-violet: 0 0 30px rgba(138, 43, 226, 0.4);
-            --glow-green: 0 0 30px rgba(0, 255, 157, 0.4);
-            
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 4rem;
-            --space-xl: 8rem;
-            --space-xxl: 12rem;
-            
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--quantum-black);
-            color: rgba(255, 255, 255, 0.92);
-            overflow-x: hidden;
-            position: relative;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* ===== QUANTUM BACKGROUND SYSTEM ===== */
-        .quantum-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -100;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
-                var(--gradient-dark);
-        }
-
-        .cyber-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -99;
-            opacity: 0.3;
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .quantum-headline {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: var(--glow-blue);
-            margin-bottom: var(--space-md);
-            line-height: 1;
-        }
-
-        .cyber-headline {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: white;
-            position: relative;
-            display: inline-block;
-        }
-
-        .cyber-headline::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 120px;
-            height: 4px;
-            background: var(--gradient-secondary);
-            border-radius: 2px;
-        }
-
-        .cyber-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 800px;
-            line-height: 1.4;
-            margin-bottom: var(--space-lg);
-        }
-
-        .cyber-data {
-            font-family: 'Space Grotesk', monospace;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-            letter-spacing: 0.05em;
-        }
-
-        /* ===== LAYOUT ===== */
-        .quantum-container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-            position: relative;
-            z-index: 10;
-        }
-
-        section {
-            padding: var(--space-xxl) 0;
-            position: relative;
-        }
-
-        /* ===== NAVIGATION ===== */
-        .cyber-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: var(--space-sm) 0;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(5, 10, 20, 0.85);
-            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
-            transition: var(--transition-smooth);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: 8px;
-            transition: var(--transition-smooth);
-        }
-
-        .nav-logo:hover {
-            background: rgba(0, 243, 255, 0.1);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: var(--space-md);
-            list-style: none;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: 6px;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--cyber-blue);
-            background: rgba(0, 243, 255, 0.1);
-        }
-
-        .nav-link:hover::before {
-            left: 100%;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .cyber-hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: 100px;
-        }
-
-        .hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1000px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--cyber-blue);
-            border-radius: 50px;
-            color: var(--cyber-blue);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-lg);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-            flex-wrap: wrap;
-        }
-
-        /* ===== CYBER BUTTONS ===== */
-        .cyber-btn {
-            position: relative;
-            padding: 1.25rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            overflow: hidden;
-            transition: var(--transition-smooth);
-            letter-spacing: 0.05em;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            min-width: 260px;
-        }
-
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .cyber-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--glow-blue);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 243, 255, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--cyber-blue);
-            border: 2px solid rgba(0, 243, 255, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 243, 255, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0, 243, 255, 0.3);
-        }
-
-        /* ===== QUANTUM CARDS ===== */
-        .quantum-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: var(--space-lg);
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition-bounce);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 var(--glass-highlight);
-        }
-
-        .quantum-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
-        }
-
-        .quantum-card:hover {
-            transform: translateY(-15px);
-            border-color: rgba(0, 243, 255, 0.3);
-            box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(0, 243, 255, 0.2),
-                var(--glow-blue);
-        }
-
-        .quantum-card:hover::before {
-            opacity: 0.1;
-        }
-
-        /* ===== RISK MATRIX ===== */
-        .risk-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-lg);
-        }
-
-        .risk-node {
-            padding: var(--space-lg);
-            border-left: 3px solid var(--cyber-blue);
-            transition: var(--transition-smooth);
-        }
-
-        .risk-node:hover {
-            border-left-color: var(--secure-green);
-            transform: translateX(10px);
-        }
-
-        .risk-icon {
-            font-size: 2rem;
-            color: var(--cyber-blue);
-            margin-bottom: var(--space-sm);
-        }
-
-        /* ===== SOLUTIONS GRID ===== */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-lg);
-        }
-
-        .solution-card {
-            height: 100%;
-        }
-
-        .solution-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-md);
-            color: var(--cyber-blue);
-        }
-
-        /* ===== TRUST FRAMEWORK ===== */
-        .trust-framework {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-lg);
-        }
-
-        .trust-node {
-            text-align: center;
-            padding: var(--space-lg);
-        }
-
-        .trust-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: var(--space-sm);
-            line-height: 1;
-        }
-
-        /* ===== ASSESSMENT SECTION ===== */
-        .assessment-section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .assessment-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .assessment-card {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: var(--space-xl) var(--space-lg);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-md);
-            margin: var(--space-lg) 0;
-            text-align: left;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm) 0;
-        }
-
-        .benefit-check {
-            color: var(--secure-green);
-            font-size: 1.2rem;
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        .contact-section {
-            text-align: center;
-        }
-
-        .contact-email {
-            font-size: 1.8rem;
-            color: var(--cyber-blue);
-            text-decoration: none;
-            display: inline-block;
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: 50px;
-            border: 2px solid transparent;
-            background: linear-gradient(var(--deep-navy), var(--deep-navy)) padding-box,
-                        linear-gradient(135deg, var(--cyber-blue), var(--quantum-violet)) border-box;
-            transition: var(--transition-smooth);
-        }
-
-        .contact-email:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glow-blue);
-        }
-
-        /* ===== FOOTER ===== */
-        .cyber-footer {
-            padding: var(--space-xl) 0 var(--space-lg);
-            text-align: center;
-            position: relative;
-        }
-
-        .cyber-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent);
-            border-radius: 2px;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        @keyframes stream {
-            0% { transform: translateX(-100%); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateX(100%); opacity: 0; }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .quantum-headline {
-                font-size: clamp(2.5rem, 6vw, 4.5rem);
-            }
-            
-            section {
-                padding: var(--space-xl) 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-            }
-            
-            .cyber-btn {
-                width: 100%;
-            }
-            
-            .quantum-card {
-                padding: var(--space-md);
-            }
-        }
-
-        /* ===== SCROLL ANIMATIONS ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== CUSTOM SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(5, 10, 20, 0.8);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Quantum Background -->
-    <div class="quantum-background"></div>
-    <div class="cyber-grid"></div>
-
-    <!-- Navigation -->
-    <nav class="cyber-nav">
-        <div class="quantum-container nav-container">
-            <a href="#" class="nav-logo">CYBERGUARD AI</a>
-            <ul class="nav-menu">
-                <li><a href="#risk" class="nav-link">Risk Landscape</a></li>
-                <li><a href="#solutions" class="nav-link">Solutions</a></li>
-                <li><a href="#trust" class="nav-link">Trust Framework</a></li>
-                <li><a href="#assessment" class="nav-link">Assessment</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="cyber-hero">
-        <canvas class="hero-canvas" id="heroCanvas"></canvas>
-        <div class="quantum-container">
-            <div class="hero-content">
-                <div class="hero-badge">ADVANCED SECURITY INTELLIGENCE</div>
-                <h1 class="quantum-headline fade-in">
-                    Advanced Website Security<br>
-                    <span class="cyber-data">for a Connected World</span>
-                </h1>
-                <p class="cyber-subtitle fade-in">
-                    Protecting modern businesses through intelligent, resilient, and proactive security practices. 
-                    AI-driven threat detection and prevention for digital infrastructure.
-                </p>
-                <div class="hero-cta fade-in">
-                    <button class="cyber-btn btn-primary" onclick="scrollToAssessment()">
-                        Request a Free Security Assessment
-                    </button>
-                    <button class="cyber-btn btn-secondary" onclick="scrollToContact()">
-                        Start a Secure Conversation
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Risk Landscape -->
-    <section id="risk">
-        <div class="quantum-container">
-            <div class="section-title fade-in">
-                <h2 class="cyber-headline">Digital Risk Landscape</h2>
-                <p class="cyber-subtitle">
-                    Understanding modern digital vulnerabilities requires sophisticated analysis 
-                    of complex, interconnected systems and emerging threat vectors.
-                </p>
-            </div>
-            <div class="risk-matrix">
-                <div class="quantum-card risk-node fade-in">
-                    <div class="risk-icon">🛡️</div>
-                    <h3>Invisible Vulnerabilities</h3>
-                    <p>Advanced threats bypass conventional detection, operating below security thresholds while maintaining persistence within systems.</p>
-                </div>
-                <div class="quantum-card risk-node fade-in">
-                    <div class="risk-icon">⏳</div>
-                    <h3>Persistent Threats</h3>
-                    <p>Continuous, low-profile activities designed to extract data or maintain unauthorized access without triggering security protocols.</p>
-                </div>
-                <div class="quantum-card risk-node fade-in">
-                    <div class="risk-icon">🌐</div>
-                    <h3>Infrastructure Complexity</h3>
-                    <p>Modern digital ecosystems with interconnected services, APIs, and third-party integrations creating expanded attack surfaces.</p>
-                </div>
-                <div class="quantum-card risk-node fade-in">
-                    <div class="risk-icon">📊</div>
-                    <h3>Operational Impact</h3>
-                    <p>Security incidents affecting business continuity, data integrity, and operational efficiency across distributed systems.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solutions -->
-    <section id="solutions" style="background: rgba(10, 20, 40, 0.5);">
-        <div class="quantum-container">
-            <div class="section-title fade-in">
-                <h2 class="cyber-headline">Advanced Security Solutions</h2>
-                <p class="cyber-subtitle">
-                    Comprehensive capabilities designed to protect, detect, and respond to evolving digital threats.
-                </p>
-            </div>
-            <div class="solutions-grid">
-                <div class="quantum-card solution-card fade-in">
-                    <div class="solution-icon">🔍</div>
-                    <h3>Intelligent Security Assessment</h3>
-                    <p>Comprehensive analysis of digital infrastructure identifying vulnerabilities through advanced scanning and manual testing.</p>
-                    <div class="solution-features">
-                        <p><span class="cyber-data">✓</span> Infrastructure mapping</p>
-                        <p><span class="cyber-data">✓</span> Vulnerability identification</p>
-                        <p><span class="cyber-data">✓</span> Risk prioritization</p>
-                    </div>
-                </div>
-                <div class="quantum-card solution-card fade-in">
-                    <div class="solution-icon">🛡️</div>
-                    <h3>Precision Threat Resolution</h3>
-                    <p>Targeted identification and elimination of malicious code with minimal operational disruption and comprehensive verification.</p>
-                    <div class="solution-features">
-                        <p><span class="cyber-data">✓</span> Advanced detection</p>
-                        <p><span class="cyber-data">✓</span> Safe removal procedures</p>
-                        <p><span class="cyber-data">✓</span> System verification</p>
-                    </div>
-                </div>
-                <div class="quantum-card solution-card fade-in">
-                    <div class="solution-icon">🔄</div>
-                    <h3>Continuous Protection</h3>
-                    <p>Proactive monitoring of digital assets with real-time alerts and immediate response protocols across all attack vectors.</p>
-                    <div class="solution-features">
-                        <p><span class="cyber-data">✓</span> 24/7 system monitoring</p>
-                        <p><span class="cyber-data">✓</span> Real-time threat detection</p>
-                        <p><span class="cyber-data">✓</span> Immediate response</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Framework -->
-    <section id="trust">
-        <div class="quantum-container">
-            <div class="section-title fade-in">
-                <h2 class="cyber-headline">Trust Through Precision</h2>
-                <p class="cyber-subtitle">
-                    A methodology built on transparency, clarity, and responsible security practices.
-                </p>
-            </div>
-            <div class="trust-framework">
-                <div class="quantum-card trust-node fade-in">
-                    <div class="trust-number">01</div>
-                    <h3>Precision Methodology</h3>
-                    <p>Every security action calculated, documented, and executed with meticulous attention to detail.</p>
-                </div>
-                <div class="quantum-card trust-node fade-in">
-                    <div class="trust-number">02</div>
-                    <h3>Transparent Communication</h3>
-                    <p>Clear, understandable reporting explaining risks, actions, and recommendations without technical obfuscation.</p>
-                </div>
-                <div class="quantum-card trust-node fade-in">
-                    <div class="trust-number">03</div>
-                    <h3>Responsible Handling</h3>
-                    <p>Respect for infrastructure with non-invasive techniques and minimal operational disruption.</p>
-                </div>
-                <div class="quantum-card trust-node fade-in">
-                    <div class="trust-number">04</div>
-                    <h3>Global Reliability</h3>
-                    <p>Consistent, reliable security services delivered remotely worldwide with operational excellence.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Assessment Section -->
-    <section id="assessment" class="assessment-section">
-        <div class="quantum-container">
-            <div class="assessment-card quantum-card fade-in">
-                <h2 class="cyber-headline" style="margin-bottom: var(--space-md);">Free Security Assessment</h2>
-                <p class="cyber-subtitle" style="margin-bottom: var(--space-xl);">
-                    A comprehensive evaluation of your website's security posture with actionable insights.
-                </p>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <span class="benefit-check">✓</span>
-                        <span>Detailed vulnerability report with risk ratings</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-check">✓</span>
-                        <span>Risk severity assessment and prioritization</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-check">✓</span>
-                        <span>Remediation action plan with step-by-step guidance</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-check">✓</span>
-                        <span>Security hardening recommendations</span>
-                    </div>
-                </div>
-                
-                <p style="text-align: center; margin: var(--space-lg) 0; font-size: 1.2rem;">
-                    <strong>No obligation · Response within 24 hours · Confidential assessment</strong>
-                </p>
-                
-                <div style="text-align: center;">
-                    <button class="cyber-btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.2rem;" onclick="scrollToContact()">
-                        Request Your Free Assessment
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="quantum-container">
-            <div class="section-title fade-in">
-                <h2 class="cyber-headline">Secure Communication</h2>
-                <p class="cyber-subtitle">
-                    Initiate a confidential conversation about your security requirements.
-                </p>
-            </div>
-            <div class="fade-in">
-                <div class="quantum-card" style="max-width: 600px; margin: 0 auto; padding: var(--space-xl);">
-                    <p style="text-align: center; margin-bottom: var(--space-lg);">
-                        For inquiries regarding security assessments or consultation services.
-                    </p>
-                    <div style="text-align: center; margin-bottom: var(--space-lg);">
-                        <a href="mailto:security@cyberguard.ai" class="contact-email">
-                            security@cyberguard.ai
-                        </a>
-                    </div>
-                    <p style="text-align: center; color: rgba(255,255,255,0.6);">
-                        Response guaranteed within 24 hours for all professional inquiries.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="cyber-footer">
-        <div class="quantum-container">
-            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8);">
-                Website Security Consultant | Serving Clients Globally
-            </p>
-            <p style="margin-top: var(--space-sm); color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-                © <span id="currentYear"></span> CYBERGUARD AI. Advanced Security Intelligence.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Quantum JavaScript -->
-    <script>
-        // Initialize Quantum System
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Initialize Three.js Background
-            initQuantumBackground();
-            
-            // Initialize Scroll Animations
-            initScrollAnimations();
-            
-            // Initialize Navigation
-            initNavigation();
-            
-            // Create Data Streams
-            createDataStreams();
-        });
-
-        // Three.js Quantum Background
-        function initQuantumBackground() {
-            const canvas = document.getElementById('heroCanvas');
-            if (!canvas || !THREE) return;
-            
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas,
-                alpha: true,
-                antialias: true 
-            });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            
-            // Create quantum particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particleCount = 800;
-            
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 40;
-                positions[i + 1] = (Math.random() - 0.5) * 40;
-                positions[i + 2] = (Math.random() - 0.5) * 40;
-                
-                // Quantum colors
-                const colorType = Math.random();
-                if (colorType < 0.33) {
-                    // Cyan
-                    colors[i] = 0;
-                    colors[i + 1] = 0.95 + Math.random() * 0.05;
-                    colors[i + 2] = 1;
-                } else if (colorType < 0.66) {
-                    // Blue
-                    colors[i] = 0;
-                    colors[i + 1] = 0.5 + Math.random() * 0.3;
-                    colors[i + 2] = 1;
-                } else {
-                    // Purple
-                    colors[i] = 0.54 + Math.random() * 0.2;
-                    colors[i + 1] = 0.17;
-                    colors[i + 2] = 0.89 + Math.random() * 0.1;
-                }
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.1,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
-            });
-            
-            const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particles);
-            
-            camera.position.z = 25;
-            
-            // Animation
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                particles.rotation.x += 0.001;
-                particles.rotation.y += 0.002;
-                
-                // Gentle movement
-                const time = Date.now() * 0.001;
-                particles.position.x = Math.sin(time * 0.1) * 2;
-                particles.position.y = Math.cos(time * 0.05) * 1;
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // Handle resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        // Scroll Animations
-        function initScrollAnimations() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const fadeInOnScroll = () => {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    
-                    if (elementTop < window.innerHeight - elementVisible) {
-                        element.classList.add('visible');
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', fadeInOnScroll);
-            window.addEventListener('load', fadeInOnScroll);
-            
-            // Nav scroll effect
-            const nav = document.querySelector('.cyber-nav');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.style.background = 'rgba(5, 10, 20, 0.95)';
-                    nav.style.padding = '0.5rem 0';
-                } else {
-                    nav.style.background = 'rgba(5, 10, 20, 0.85)';
-                    nav.style.padding = '1rem 0';
-                }
-            });
-        }
-
-        // Navigation
-        function initNavigation() {
-            // Smooth scroll for nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        window.scrollTo({
-                            top: targetSection.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Create Data Streams
-        function createDataStreams() {
-            const container = document.body;
-            
-            for (let i = 0; i < 15; i++) {
-                const stream = document.createElement('div');
-                stream.style.position = 'fixed';
-                stream.style.width = '100%';
-                stream.style.height = '1px';
-                stream.style.background = 'linear-gradient(90deg, transparent, #00F3FF, transparent)';
-                stream.style.boxShadow = '0 0 20px #00F3FF';
-                stream.style.top = `${Math.random() * 100}%`;
-                stream.style.left = '0';
-                stream.style.opacity = '0';
-                stream.style.zIndex = '1';
-                stream.style.animation = `stream ${3 + Math.random() * 2}s linear ${Math.random() * 5}s infinite`;
-                
-                container.appendChild(stream);
-                
-                // Add CSS animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes stream {
-                        0% { transform: translateX(-100%); opacity: 0; }
-                        10% { opacity: 0.5; }
-                        90% { opacity: 0.5; }
-                        100% { transform: translateX(100%); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
-
-        // Button Functions
-        function scrollToAssessment() {
-            const section = document.getElementById('assessment');
-            window.scrollTo({
-                top: section.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-
-        function scrollToContact() {
-            const section = document.getElementById('contact');
-            window.scrollTo({
-                top: section.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-
-        // Card Hover Effects
-        document.querySelectorAll('.quantum-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Button Hover Effects
-        document.querySelectorAll('.cyber-btn').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                if (!this.classList.contains('btn-primary')) {
-                    this.style.transform = 'translateY(0)';
-                }
-            });
-        });
-    </script>
-</body>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>RajKumar | Raj0x - Advanced Website Security Specialist</title> 
+  <meta name="description" content="Raj0x (Raj Kumar) - Intelligent, resilient, and proactive website security solutions. AI-powered threat detection and prevention."> 
+  <!-- Advanced Graphics Libraries --> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script> 
+  <!-- Fonts --> 
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+  <style> 
+    /* ===== QUANTUM CYBERSECURITY DESIGN SYSTEM ===== */ 
+    :root { 
+      --quantum-black: #050A14; 
+      --deep-navy: #0A1428; 
+      --cyber-blue: #00F3FF; 
+      --neon-cyan: #00FFFF; 
+      --quantum-violet: #8A2BE2; 
+      --electric-purple: #9D4EDD; 
+      --secure-green: #00FF9D; 
+      --alert-amber: #FFB347; 
+      --gradient-primary: linear-gradient(135deg, var(--cyber-blue) 0%, var(--quantum-violet) 50%, var(--electric-purple) 100%); 
+      --gradient-secondary: linear-gradient(90deg, var(--neon-cyan) 0%, var(--secure-green) 100%); 
+      --gradient-dark: linear-gradient(180deg, rgba(5,10,20,0.95) 0%, rgba(10,20,40,0.98) 100%); 
+      --glass-bg: rgba(10, 20, 40, 0.25); 
+      --glass-border: rgba(0, 243, 255, 0.15); 
+      --glass-highlight: rgba(255, 255, 255, 0.08); 
+      --glow-blue: 0 0 30px rgba(0, 243, 255, 0.4); 
+      --glow-violet: 0 0 30px rgba(138, 43, 226, 0.4); 
+      --glow-green: 0 0 30px rgba(0, 255, 157, 0.4); 
+      --space-xs: 0.5rem; 
+      --space-sm: 1rem; 
+      --space-md: 2rem; 
+      --space-lg: 4rem; 
+      --space-xl: 8rem; 
+      --space-xxl: 12rem; 
+      --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+      --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+    } 
+
+    /* ===== RESET & BASE ===== */ 
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    } 
+
+    html { 
+      scroll-behavior: smooth; 
+      overflow-x: hidden; 
+    } 
+
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: var(--quantum-black); 
+      color: rgba(255, 255, 255, 0.92); 
+      overflow-x: hidden; 
+      position: relative; 
+      line-height: 1.6; 
+      font-weight: 300; 
+    } 
+
+    /* ===== QUANTUM BACKGROUND SYSTEM ===== */ 
+    .quantum-background { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: -100; 
+      background: radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 50%), 
+                  radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%), 
+                  var(--gradient-dark); 
+    } 
+
+    .cyber-grid { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), 
+                        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px); 
+      background-size: 50px 50px; 
+      z-index: -99; 
+      opacity: 0.3; 
+    } 
+
+    /* ===== TYPOGRAPHY ===== */ 
+    h1, h2, h3, h4, h5, h6 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-weight: 700; 
+      line-height: 1.1; 
+      letter-spacing: -0.02em; 
+    } 
+
+    .quantum-headline { 
+      font-size: clamp(3rem, 8vw, 5.5rem); 
+      background: var(--gradient-primary); 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent; 
+      text-shadow: var(--glow-blue); 
+      margin-bottom: var(--space-md); 
+      line-height: 1; 
+    } 
+
+    .cyber-headline { 
+      font-size: clamp(2.5rem, 6vw, 4rem); 
+      color: white; 
+      position: relative; 
+      display: inline-block; 
+    } 
+
+    .cyber-headline::after { 
+      content: ''; 
+      position: absolute; 
+      bottom: -12px; 
+      left: 0; 
+      width: 120px; 
+      height: 4px; 
+      background: var(--gradient-secondary); 
+      border-radius: 2px; 
+    } 
+
+    .cyber-subtitle { 
+      font-size: clamp(1.2rem, 3vw, 1.8rem); 
+      font-weight: 300; 
+      color: rgba(255, 255, 255, 0.7); 
+      max-width: 800px; 
+      line-height: 1.4; 
+      margin-bottom: var(--space-lg); 
+    } 
+
+    .cyber-data { 
+      font-family: 'Space Grotesk', monospace; 
+      color: var(--neon-cyan); 
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3); 
+      letter-spacing: 0.05em; 
+    } 
+
+    /* ===== LAYOUT ===== */ 
+    .quantum-container { 
+      width: 100%; 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 0 var(--space-md); 
+      position: relative; 
+      z-index: 10; 
+    } 
+
+    section { 
+      padding: var(--space-xxl) 0; 
+      position: relative; 
+    } 
+
+    /* ===== NAVIGATION ===== */ 
+    .cyber-nav { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      z-index: 1000; 
+      padding: var(--space-sm) 0; 
+      backdrop-filter: blur(20px); 
+      -webkit-backdrop-filter: blur(20px); 
+      background: rgba(5, 10, 20, 0.85); 
+      border-bottom: 1px solid rgba(0, 243, 255, 0.1); 
+      transition: var(--transition-smooth); 
+    } 
+
+    .nav-container { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    } 
+
+    .nav-logo { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 1.8rem; 
+      font-weight: 800; 
+      background: var(--gradient-primary); 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent; 
+      text-decoration: none; 
+      padding: var(--space-xs) var(--space-sm); 
+      border-radius: 8px; 
+      transition: var(--transition-smooth); 
+    } 
+
+    .nav-logo:hover { 
+      background: rgba(0, 243, 255, 0.1); 
+    } 
+
+    .nav-menu { 
+      display: flex; 
+      gap: var(--space-md); 
+      list-style: none; 
+    } 
+
+    .nav-link { 
+      color: rgba(255, 255, 255, 0.8); 
+      text-decoration: none; 
+      font-weight: 500; 
+      padding: var(--space-xs) var(--space-sm); 
+      border-radius: 6px; 
+      transition: var(--transition-smooth); 
+      position: relative; 
+      overflow: hidden; 
+    } 
+
+    .nav-link::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: -100%; 
+      width: 100%; 
+      height: 100%; 
+      background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent); 
+      transition: left 0.5s ease; 
+    } 
+
+    .nav-link:hover { 
+      color: var(--cyber-blue); 
+      background: rgba(0, 243, 255, 0.1); 
+    } 
+
+    .nav-link:hover::before { 
+      left: 100%; 
+    } 
+
+    /* ===== HERO SECTION ===== */ 
+    .cyber-hero { 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      position: relative; 
+      padding-top: 100px; 
+    } 
+
+    .hero-canvas { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: 1; 
+    } 
+
+    .hero-content { 
+      position: relative; 
+      z-index: 10; 
+      max-width: 1000px; 
+    } 
+
+    .hero-badge { 
+      display: inline-block; 
+      padding: var(--space-xs) var(--space-md); 
+      background: rgba(0, 243, 255, 0.1); 
+      border: 1px solid var(--cyber-blue); 
+      border-radius: 50px; 
+      color: var(--cyber-blue); 
+      font-size: 0.9rem; 
+      letter-spacing: 0.1em; 
+      margin-bottom: var(--space-lg); 
+      animation: float 3s ease-in-out infinite; 
+    } 
+
+    .hero-cta { 
+      display: flex; 
+      gap: var(--space-md); 
+      margin-top: var(--space-xl); 
+      flex-wrap: wrap; 
+    } 
+
+    /* ===== CYBER BUTTONS ===== */ 
+    .cyber-btn { 
+      position: relative; 
+      padding: 1.25rem 2.5rem; 
+      border: none; 
+      border-radius: 50px; 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-weight: 600; 
+      font-size: 1.1rem; 
+      cursor: pointer; 
+      overflow: hidden; 
+      transition: var(--transition-smooth); 
+      letter-spacing: 0.05em; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: var(--space-xs); 
+      min-width: 260px; 
+    } 
+
+    .cyber-btn::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%); 
+      transform: translateX(-100%); 
+      transition: transform 0.6s ease; 
+    } 
+
+    .cyber-btn:hover::before { 
+      transform: translateX(100%); 
+    } 
+
+    .btn-primary { 
+      background: var(--gradient-primary); 
+      color: white; 
+      box-shadow: var(--glow-blue); 
+    } 
+
+    .btn-primary:hover { 
+      transform: translateY(-5px) scale(1.05); 
+      box-shadow: 0 20px 60px rgba(0, 243, 255, 0.6); 
+    } 
+
+    .btn-secondary { 
+      background: transparent; 
+      color: var(--cyber-blue); 
+      border: 2px solid rgba(0, 243, 255, 0.4); 
+      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2); 
+    } 
+
+    .btn-secondary:hover { 
+      background: rgba(0, 243, 255, 0.1); 
+      transform: translateY(-5px); 
+      box-shadow: 0 15px 50px rgba(0, 243, 255, 0.3); 
+    } 
+
+    /* ===== QUANTUM CARDS ===== */ 
+    .quantum-card { 
+      background: var(--glass-bg); 
+      backdrop-filter: blur(20px); 
+      -webkit-backdrop-filter: blur(20px); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: var(--space-lg); 
+      position: relative; 
+      overflow: hidden; 
+      transition: var(--transition-bounce); 
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 var(--glass-highlight); 
+    } 
+
+    .quantum-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: var(--gradient-primary); 
+      opacity: 0; 
+      transition: opacity 0.5s ease; 
+      z-index: -1; 
+    } 
+
+    .quantum-card:hover { 
+      transform: translateY(-15px); 
+      border-color: rgba(0, 243, 255, 0.3); 
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 243, 255, 0.2), var(--glow-blue); 
+    } 
+
+    .quantum-card:hover::before { 
+      opacity: 0.1; 
+    } 
+
+    /* ===== RISK MATRIX ===== */ 
+    .risk-matrix { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: var(--space-md); 
+      margin-top: var(--space-lg); 
+    } 
+
+    .risk-node { 
+      padding: var(--space-lg); 
+      border-left: 3px solid var(--cyber-blue); 
+      transition: var(--transition-smooth); 
+    } 
+
+    .risk-node:hover { 
+      border-left-color: var(--secure-green); 
+      transform: translateX(10px); 
+    } 
+
+    .risk-icon { 
+      font-size: 2rem; 
+      color: var(--cyber-blue); 
+      margin-bottom: var(--space-sm); 
+    } 
+
+    /* ===== SOLUTIONS GRID ===== */ 
+    .solutions-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+      gap: var(--space-md); 
+      margin-top: var(--space-lg); 
+    } 
+
+    .solution-card { 
+      height: 100%; 
+    } 
+
+    .solution-icon { 
+      font-size: 2.5rem; 
+      margin-bottom: var(--space-md); 
+      color: var(--cyber-blue); 
+    } 
+
+    /* ===== TRUST FRAMEWORK ===== */ 
+    .trust-framework { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: var(--space-md); 
+      margin-top: var(--space-lg); 
+    } 
+
+    .trust-node { 
+      text-align: center; 
+      padding: var(--space-lg); 
+    } 
+
+    .trust-number { 
+      font-size: 3.5rem; 
+      font-weight: 800; 
+      background: var(--gradient-primary); 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent; 
+      margin-bottom: var(--space-sm); 
+      line-height: 1; 
+    } 
+
+    /* ===== ASSESSMENT SECTION ===== */ 
+    .assessment-section { 
+      position: relative; 
+      overflow: hidden; 
+    } 
+
+    .assessment-section::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: radial-gradient(circle at center, rgba(0, 243, 255, 0.15) 0%, transparent 70%); 
+      z-index: -1; 
+    } 
+
+    .assessment-card { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      text-align: center; 
+      padding: var(--space-xl) var(--space-lg); 
+    } 
+
+    .benefits-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+      gap: var(--space-md); 
+      margin: var(--space-lg) 0; 
+      text-align: left; 
+    } 
+
+    .benefit-item { 
+      display: flex; 
+      align-items: center; 
+      gap: var(--space-sm); 
+      padding: var(--space-sm) 0; 
+    } 
+
+    .benefit-check { 
+      color: var(--secure-green); 
+      font-size: 1.2rem; 
+    } 
+
+    /* ===== CONTACT SECTION ===== */ 
+    .contact-section { 
+      text-align: center; 
+    } 
+
+    .contact-email { 
+      font-size: 1.8rem; 
+      color: var(--cyber-blue); 
+      text-decoration: none; 
+      display: inline-block; 
+      padding: var(--space-sm) var(--space-lg); 
+      border-radius: 50px; 
+      border: 2px solid transparent; 
+      background: linear-gradient(var(--deep-navy), var(--deep-navy)) padding-box, 
+                  linear-gradient(135deg, var(--cyber-blue), var(--quantum-violet)) border-box; 
+      transition: var(--transition-smooth); 
+    } 
+
+    .contact-email:hover { 
+      transform: translateY(-5px); 
+      box-shadow: var(--glow-blue); 
+    } 
+
+    /* ===== FOOTER ===== */ 
+    .cyber-footer { 
+      padding: var(--space-xl) 0 var(--space-lg); 
+      text-align: center; 
+      position: relative; 
+    } 
+
+    .cyber-footer::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      width: 200px; 
+      height: 4px; 
+      background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent); 
+      border-radius: 2px; 
+    } 
+
+    /* ===== ANIMATIONS ===== */ 
+    @keyframes float { 
+      0%, 100% { transform: translateY(0); } 
+      50% { transform: translateY(-10px); } 
+    } 
+
+    @keyframes pulse { 
+      0%, 100% { opacity: 1; } 
+      50% { opacity: 0.7; } 
+    } 
+
+    @keyframes stream { 
+      0% { transform: translateX(-100%); opacity: 0; } 
+      10% { opacity: 1; } 
+      90% { opacity: 1; } 
+      100% { transform: translateX(100%); opacity: 0; } 
+    } 
+
+    /* ===== RESPONSIVE ===== */ 
+    @media (max-width: 1200px) { 
+      .quantum-headline { 
+        font-size: clamp(2.5rem, 6vw, 4.5rem); 
+      } 
+      section { 
+        padding: var(--space-xl) 0; 
+      } 
+    } 
+
+    @media (max-width: 768px) { 
+      .nav-menu { 
+        display: none; 
+      } 
+      .hero-cta { 
+        flex-direction: column; 
+      } 
+      .cyber-btn { 
+        width: 100%; 
+      } 
+      .quantum-card { 
+        padding: var(--space-md); 
+      } 
+    } 
+
+    /* ===== SCROLL ANIMATIONS ===== */ 
+    .fade-in { 
+      opacity: 0; 
+      transform: translateY(30px); 
+      transition: opacity 0.8s ease, transform 0.8s ease; 
+    } 
+
+    .fade-in.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    } 
+
+    /* ===== CUSTOM SCROLLBAR ===== */ 
+    ::-webkit-scrollbar { 
+      width: 10px; 
+    } 
+
+    ::-webkit-scrollbar-track { 
+      background: rgba(5, 10, 20, 0.8); 
+    } 
+
+    ::-webkit-scrollbar-thumb { 
+      background: var(--gradient-primary); 
+      border-radius: 5px; 
+    } 
+
+    /* ===== RAJ0X STYLES ===== */ 
+    .raj0x-signature { 
+      font-family: 'Space Grotesk', monospace; 
+      font-weight: 700; 
+      color: var(--neon-cyan); 
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); 
+      letter-spacing: 0.05em; 
+    } 
+
+    .raj0x-badge { 
+      display: inline-block; 
+      background: linear-gradient(45deg, #FF0066, #6600FF); 
+      color: white; 
+      padding: 4px 12px; 
+      border-radius: 4px; 
+      font-size: 0.8rem; 
+      font-weight: 600; 
+      margin-left: 10px; 
+      vertical-align: middle; 
+    } 
+  </style> 
+</head> 
+<body> 
+  <!-- Quantum Background --> 
+  <div class="quantum-background"></div> 
+  <div class="cyber-grid"></div> 
+
+  <!-- Navigation --> 
+  <nav class="cyber-nav"> 
+    <div class="quantum-container nav-container"> 
+      <a href="#" class="nav-logo">RajKumar AI <span class="raj0x-badge">Raj0x</span></a> 
+      <ul class="nav-menu"> 
+        <li><a href="#risk" class="nav-link">Risk Landscape</a></li> 
+        <li><a href="#solutions" class="nav-link">Solutions</a></li> 
+        <li><a href="#trust" class="nav-link">Trust Framework</a></li> 
+        <li><a href="#assessment" class="nav-link">Assessment</a></li> 
+        <li><a href="#contact" class="nav-link">Contact</a></li> 
+      </ul> 
+    </div> 
+  </nav> 
+
+  <!-- Hero Section --> 
+  <section class="cyber-hero"> 
+    <canvas class="hero-canvas" id="heroCanvas"></canvas> 
+    <div class="quantum-container"> 
+      <div class="hero-content"> 
+        <div class="hero-badge">RAJ0X | ADVANCED SECURITY INTELLIGENCE</div> 
+        <h1 class="quantum-headline fade-in"> 
+          Advanced Website Security<br> 
+          <span class="cyber-data">for a Connected World</span> 
+        </h1> 
+        <p class="cyber-subtitle fade-in"> 
+          Protecting modern businesses through intelligent, resilient, and proactive security practices. 
+          AI-driven threat detection and prevention for digital infrastructure. 
+        </p> 
+        <div class="hero-cta fade-in"> 
+          <button class="cyber-btn btn-primary" onclick="scrollToAssessment()"> 
+            Request a Free Security Assessment 
+          </button> 
+          <button class="cyber-btn btn-secondary" onclick="scrollToContact()"> 
+            Start a Secure Conversation 
+          </button> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Risk Landscape --> 
+  <section id="risk"> 
+    <div class="quantum-container"> 
+      <div class="section-title fade-in"> 
+        <h2 class="cyber-headline">Digital Risk Landscape</h2> 
+        <p class="cyber-subtitle"> 
+          Understanding modern digital vulnerabilities requires sophisticated analysis of complex, 
+          interconnected systems and emerging threat vectors. 
+        </p> 
+      </div> 
+      <div class="risk-matrix"> 
+        <div class="quantum-card risk-node fade-in"> 
+          <div class="risk-icon">🛡️</div> 
+          <h3>Invisible Vulnerabilities</h3> 
+          <p>Advanced threats bypass conventional detection, operating below security thresholds 
+          while maintaining persistence within systems.</p> 
+        </div> 
+        <div class="quantum-card risk-node fade-in"> 
+          <div class="risk-icon">⏳</div> 
+          <h3>Persistent Threats</h3> 
+          <p>Continuous, low-profile activities designed to extract data or maintain unauthorized 
+          access without triggering security protocols.</p> 
+        </div> 
+        <div class="quantum-card risk-node fade-in"> 
+          <div class="risk-icon">🌐</div> 
+          <h3>Infrastructure Complexity</h3> 
+          <p>Modern digital ecosystems with interconnected services, APIs, and third-party 
+          integrations creating expanded attack surfaces.</p> 
+        </div> 
+        <div class="quantum-card risk-node fade-in"> 
+          <div class="risk-icon">📊</div> 
+          <h3>Operational Impact</h3> 
+          <p>Security incidents affecting business continuity, data integrity, and operational 
+          efficiency across distributed systems.</p> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Solutions --> 
+  <section id="solutions" style="background: rgba(10, 20, 40, 0.5);"> 
+    <div class="quantum-container"> 
+      <div class="section-title fade-in"> 
+        <h2 class="cyber-headline">Advanced Security Solutions</h2> 
+        <p class="cyber-subtitle"> 
+          Comprehensive capabilities designed to protect, detect, and respond to evolving digital threats. 
+        </p> 
+      </div> 
+      <div class="solutions-grid"> 
+        <div class="quantum-card solution-card fade-in"> 
+          <div class="solution-icon">🔍</div> 
+          <h3>Intelligent Security Assessment</h3> 
+          <p>Comprehensive analysis of digital infrastructure identifying vulnerabilities 
+          through advanced scanning and manual testing.</p> 
+          <div class="solution-features"> 
+            <p><span class="cyber-data">✓</span> Infrastructure mapping</p> 
+            <p><span class="cyber-data">✓</span> Vulnerability identification</p> 
+            <p><span class="cyber-data">✓</span> Risk prioritization</p> 
+          </div> 
+        </div> 
+        <div class="quantum-card solution-card fade-in"> 
+          <div class="solution-icon">🛡️</div> 
+          <h3>Precision Threat Resolution</h3> 
+          <p>Targeted identification and elimination of malicious code with minimal operational 
+          disruption and comprehensive verification.</p> 
+          <div class="solution-features"> 
+            <p><span class="cyber-data">✓</span> Advanced detection</p> 
+            <p><span class="cyber-data">✓</span> Safe removal procedures</p> 
+            <p><span class="cyber-data">✓</span> System verification</p> 
+          </div> 
+        </div> 
+        <div class="quantum-card solution-card fade-in"> 
+          <div class="solution-icon">🔄</div> 
+          <h3>Continuous Protection</h3> 
+          <p>Proactive monitoring of digital assets with real-time alerts and immediate 
+          response protocols across all attack vectors.</p> 
+          <div class="solution-features"> 
+            <p><span class="cyber-data">✓</span> 24/7 system monitoring</p> 
+            <p><span class="cyber-data">✓</span> Real-time threat detection</p> 
+            <p><span class="cyber-data">✓</span> Immediate response</p> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Trust Framework --> 
+  <section id="trust"> 
+    <div class="quantum-container"> 
+      <div class="section-title fade-in"> 
+        <h2 class="cyber-headline">Trust Through Precision</h2> 
+        <p class="cyber-subtitle"> 
+          A methodology built on transparency, clarity, and responsible security practices. 
+        </p> 
+      </div> 
+      <div class="trust-framework"> 
+        <div class="quantum-card trust-node fade-in"> 
+          <div class="trust-number">01</div> 
+          <h3>Precision Methodology</h3> 
+          <p>Every security action calculated, documented, and executed with meticulous 
+          attention to detail.</p> 
+        </div> 
+        <div class="quantum-card trust-node fade-in"> 
+          <div class="trust-number">02</div> 
+          <h3>Transparent Communication</h3> 
+          <p>Clear, understandable reporting explaining risks, actions, and recommendations 
+          without technical obfuscation.</p> 
+        </div> 
+        <div class="quantum-card trust-node fade-in"> 
+          <div class="trust-number">03</div> 
+          <h3>Responsible Handling</h3> 
+          <p>Respect for infrastructure with non-invasive techniques and minimal operational 
+          disruption.</p> 
+        </div> 
+        <div class="quantum-card trust-node fade-in"> 
+          <div class="trust-number">04</div> 
+          <h3>Global Reliability</h3> 
+          <p>Consistent, reliable security services delivered remotely worldwide with 
+          operational excellence.</p> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Assessment Section --> 
+  <section id="assessment" class="assessment-section"> 
+    <div class="quantum-container"> 
+      <div class="assessment-card quantum-card fade-in"> 
+        <h2 class="cyber-headline" style="margin-bottom: var(--space-md);">Free Security Assessment</h2> 
+        <p class="cyber-subtitle" style="margin-bottom: var(--space-xl);"> 
+          A comprehensive evaluation of your website's security posture with actionable insights. 
+        </p> 
+        <div class="benefits-grid"> 
+          <div class="benefit-item"> 
+            <span class="benefit-check">✓</span> 
+            <span>Detailed vulnerability report with risk ratings</span> 
+          </div> 
+          <div class="benefit-item"> 
+            <span class="benefit-check">✓</span> 
+            <span>Risk severity assessment and prioritization</span> 
+          </div> 
+          <div class="benefit-item"> 
+            <span class="benefit-check">✓</span> 
+            <span>Remediation action plan with step-by-step guidance</span> 
+          </div> 
+          <div class="benefit-item"> 
+            <span class="benefit-check">✓</span> 
+            <span>Security hardening recommendations</span> 
+          </div> 
+        </div> 
+        <p style="text-align: center; margin: var(--space-lg) 0; font-size: 1.2rem;"> 
+          <strong>No obligation · Response within 24 hours · Confidential assessment</strong> 
+        </p> 
+        <div style="text-align: center;"> 
+          <button class="cyber-btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.2rem;" 
+                  onclick="scrollToContact()"> 
+            Request Your Free Assessment 
+          </button> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Contact Section --> 
+  <section id="contact" class="contact-section"> 
+    <div class="quantum-container"> 
+      <div class="section-title fade-in"> 
+        <h2 class="cyber-headline">Secure Communication</h2> 
+        <p class="cyber-subtitle"> 
+          Initiate a confidential conversation about your security requirements. 
+        </p> 
+      </div> 
+      <div class="fade-in"> 
+        <div class="quantum-card" style="max-width: 600px; margin: 0 auto; padding: var(--space-xl);"> 
+          <div style="text-align: center; margin-bottom: var(--space-md);"> 
+            <h3 style="color: var(--cyber-blue); margin-bottom: var(--space-sm);">Raj0x Security Services</h3> 
+            <p class="raj0x-signature">Raj Kumar (Raj0x)</p> 
+            <p style="color: rgba(255,255,255,0.8); margin-top: var(--space-xs);">Advanced Security Consultant</p> 
+          </div> 
+          <p style="text-align: center; margin-bottom: var(--space-lg);"> 
+            For inquiries regarding security assessments or consultation services. 
+          </p> 
+          <div style="text-align: center; margin-bottom: var(--space-lg);"> 
+            <a href="mailto:rajsingh18209@gmail.com" class="contact-email"> 
+              rajsingh18209@gmail.com 
+            </a> 
+          </div> 
+          <p style="text-align: center; color: rgba(255,255,255,0.6);"> 
+            Response guaranteed within 24 hours for all professional inquiries. 
+          </p> 
+        </div> 
+      </div> 
+    </div> 
+  </section> 
+
+  <!-- Footer --> 
+  <footer class="cyber-footer"> 
+    <div class="quantum-container"> 
+      <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8);"> 
+        <span class="raj0x-signature">Raj0x</span> | Raj Kumar · Website Security Consultant | Serving Clients Globally 
+      </p> 
+      <p style="margin-top: var(--space-sm); color: rgba(255,255,255,0.5); font-size: 0.9rem;"> 
+        © <span id="currentYear"></span> RajKumar AI. Advanced Security Intelligence. All rights reserved. 
+      </p> 
+    </div> 
+  </footer> 
+
+  <!-- Quantum JavaScript --> 
+  <script> 
+    // Initialize Quantum System 
+    document.addEventListener('DOMContentLoaded', function() { 
+      // Set current year 
+      document.getElementById('currentYear').textContent = new Date().getFullYear(); 
+      
+      // Initialize Three.js Background 
+      initQuantumBackground(); 
+      
+      // Initialize Scroll Animations 
+      initScrollAnimations(); 
+      
+      // Initialize Navigation 
+      initNavigation(); 
+      
+      // Create Data Streams 
+      createDataStreams(); 
+      
+      // Raj0x Signature Effect 
+      initRaj0xSignature(); 
+    }); 
+
+    // Three.js Quantum Background 
+    function initQuantumBackground() { 
+      const canvas = document.getElementById('heroCanvas'); 
+      if (!canvas || !THREE) return; 
+
+      const scene = new THREE.Scene(); 
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); 
+      const renderer = new THREE.WebGLRenderer({ 
+        canvas, 
+        alpha: true, 
+        antialias: true 
+      }); 
+
+      renderer.setSize(window.innerWidth, window.innerHeight); 
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
+
+      // Create quantum particles 
+      const particlesGeometry = new THREE.BufferGeometry(); 
+      const particleCount = 800; 
+      const positions = new Float32Array(particleCount * 3); 
+      const colors = new Float32Array(particleCount * 3); 
+
+      for (let i = 0; i < particleCount * 3; i += 3) { 
+        positions[i] = (Math.random() - 0.5) * 40; 
+        positions[i + 1] = (Math.random() - 0.5) * 40; 
+        positions[i + 2] = (Math.random() - 0.5) * 40; 
+
+        // Quantum colors 
+        const colorType = Math.random(); 
+        if (colorType < 0.33) { 
+          // Cyan 
+          colors[i] = 0; 
+          colors[i + 1] = 0.95 + Math.random() * 0.05; 
+          colors[i + 2] = 1; 
+        } else if (colorType < 0.66) { 
+          // Blue 
+          colors[i] = 0; 
+          colors[i + 1] = 0.5 + Math.random() * 0.3; 
+          colors[i + 2] = 1; 
+        } else { 
+          // Purple 
+          colors[i] = 0.54 + Math.random() * 0.2; 
+          colors[i + 1] = 0.17; 
+          colors[i + 2] = 0.89 + Math.random() * 0.1; 
+        } 
+      } 
+
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)); 
+      particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3)); 
+
+      const particlesMaterial = new THREE.PointsMaterial({ 
+        size: 0.1, 
+        vertexColors: true, 
+        transparent: true, 
+        opacity: 0.8, 
+        blending: THREE.AdditiveBlending 
+      }); 
+
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial); 
+      scene.add(particles); 
+
+      camera.position.z = 25; 
+
+      // Animation 
+      function animate() { 
+        requestAnimationFrame(animate); 
+
+        particles.rotation.x += 0.001; 
+        particles.rotation.y += 0.002; 
+
+        // Gentle movement 
+        const time = Date.now() * 0.001; 
+        particles.position.x = Math.sin(time * 0.1) * 2; 
+        particles.position.y = Math.cos(time * 0.05) * 1; 
+
+        renderer.render(scene, camera); 
+      } 
+
+      animate(); 
+
+      // Handle resize 
+      window.addEventListener('resize', () => { 
+        camera.aspect = window.innerWidth / window.innerHeight; 
+        camera.updateProjectionMatrix(); 
+        renderer.setSize(window.innerWidth, window.innerHeight); 
+      }); 
+    } 
+
+    // Scroll Animations 
+    function initScrollAnimations() { 
+      const fadeElements = document.querySelectorAll('.fade-in'); 
+
+      const fadeInOnScroll = () => { 
+        fadeElements.forEach(element => { 
+          const elementTop = element.getBoundingClientRect().top; 
+          const elementVisible = 150; 
+
+          if (elementTop < window.innerHeight - elementVisible) { 
+            element.classList.add('visible'); 
+          } 
+        }); 
+      }; 
+
+      window.addEventListener('scroll', fadeInOnScroll); 
+      window.addEventListener('load', fadeInOnScroll); 
+
+      // Nav scroll effect 
+      const nav = document.querySelector('.cyber-nav'); 
+      window.addEventListener('scroll', () => { 
+        if (window.scrollY > 50) { 
+          nav.style.background = 'rgba(5, 10, 20, 0.95)'; 
+          nav.style.padding = '0.5rem 0'; 
+        } else { 
+          nav.style.background = 'rgba(5, 10, 20, 0.85)'; 
+          nav.style.padding = '1rem 0'; 
+        } 
+      }); 
+    } 
+
+    // Navigation 
+    function initNavigation() { 
+      // Smooth scroll for nav links 
+      document.querySelectorAll('.nav-link').forEach(link => { 
+        link.addEventListener('click', function(e) { 
+          e.preventDefault(); 
+          const targetId = this.getAttribute('href'); 
+          const targetSection = document.querySelector(targetId); 
+
+          if (targetSection) { 
+            window.scrollTo({ 
+              top: targetSection.offsetTop - 80, 
+              behavior: 'smooth' 
+            }); 
+          } 
+        }); 
+      }); 
+    } 
+
+    // Create Data Streams 
+    function createDataStreams() { 
+      const container = document.body; 
+
+      for (let i = 0; i < 15; i++) { 
+        const stream = document.createElement('div'); 
+        stream.style.position = 'fixed'; 
+        stream.style.width = '100%'; 
+        stream.style.height = '1px'; 
+        stream.style.background = 'linear-gradient(90deg, transparent, #00F3FF, transparent)'; 
+        stream.style.boxShadow = '0 0 20px #00F3FF'; 
+        stream.style.top = `${Math.random() * 100}%`; 
+        stream.style.left = '0'; 
+        stream.style.opacity = '0'; 
+        stream.style.zIndex = '1'; 
+        stream.style.animation = `stream ${3 + Math.random() * 2}s linear ${Math.random() * 5}s infinite`; 
+
+        container.appendChild(stream); 
+
+        // Add CSS animation 
+        const style = document.createElement('style'); 
+        style.textContent = ` 
+          @keyframes stream { 
+            0% { transform: translateX(-100%); opacity: 0; } 
+            10% { opacity: 0.5; } 
+            90% { opacity: 0.5; } 
+            100% { transform: translateX(100%); opacity: 0; } 
+          } 
+        `; 
+        document.head.appendChild(style); 
+      } 
+    } 
+
+    // Raj0x Signature Effect 
+    function initRaj0xSignature() { 
+      const signature = document.querySelector('.raj0x-signature'); 
+      if (signature) { 
+        setInterval(() => { 
+          signature.style.textShadow = `0 0 10px rgba(${Math.random() * 255}, ${Math.random() * 255}, 255, 0.7)`; 
+        }, 3000); 
+      } 
+    } 
+
+    // Button Functions 
+    function scrollToAssessment() { 
+      const section = document.getElementById('assessment'); 
+      window.scrollTo({ 
+        top: section.offsetTop - 80, 
+        behavior: 'smooth' 
+      }); 
+    } 
+
+    function scrollToContact() { 
+      const section = document.getElementById('contact'); 
+      window.scrollTo({ 
+        top: section.offsetTop - 80, 
+        behavior: 'smooth' 
+      }); 
+    } 
+
+    // Card Hover Effects 
+    document.querySelectorAll('.quantum-card').forEach(card => { 
+      card.addEventListener('mouseenter', function() { 
+        this.style.transform = 'translateY(-15px) scale(1.02)'; 
+      }); 
+
+      card.addEventListener('mouseleave', function() { 
+        this.style.transform = 'translateY(0) scale(1)'; 
+      }); 
+    }); 
+
+    // Button Hover Effects 
+    document.querySelectorAll('.cyber-btn').forEach(button => { 
+      button.addEventListener('mouseenter', function() { 
+        this.style.transform = 'translateY(-5px)'; 
+      }); 
+
+      button.addEventListener('mouseleave', function() { 
+        if (!this.classList.contains('btn-primary')) { 
+          this.style.transform = 'translateY(0)'; 
+        } 
+      }); 
+    }); 
+  </script> 
+</body> 
 </html>
